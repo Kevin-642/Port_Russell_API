@@ -1,0 +1,302 @@
+<header>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</header>
+<div class="container" style="text-align: center;">
+
+    <h2>Tableau de bord</h2>
+    <br>
+    <h3>Bonjour <%= user.name %></h3>
+    <br>
+    <p> Email : <%= user.email %></p>
+
+    <br>
+    <div class="row justify-content-around align-items-center">
+        <h4 style="padding-bottom: 60px;">Utilisateurs</h4>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Ajouter un utilisateur</h5>
+            <br>
+            <input type="button" value="Formulaire" onclick="showForm('addUser')">
+            <form action="/users/add" method="post" style="display: none;" id="addUser">
+                <br>
+                <fieldset>
+                    <p>Entrer les informations du nouvel utilisateur.</p>
+                    <label for="name">Nom : </label>
+                    <input type="text" name="name">
+                    <br><br>
+                    <label for="email">Email : </label>
+                    <input type="email" name="email">
+                    <br><br>
+                    <label for="password">Mot de passe : </label>
+                    <input type="password" name="password">
+                    <br><br>
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="submit" value="Ajouter utilisateur">
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Liste des utilisateurs</h5>
+            <br>
+            <a href="/users"><input type="button" value="Afficher la liste"></a>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Modifier utilisateur</h5>
+            <p>Entrer l'id de l'utilisateur à modifier ci-dessous avant d'afficher le formulaire.</p>
+            <input type="text" id="userToEditId">
+            <br><br>
+            <input type="button" value="Formulaire" onclick="showForm('editUser'); getUserIdToEditActionForm('userToEditId', 'editUser')">
+            <form action="" method="post" style="display: none;" id="editUser">
+                <br>
+                <fieldset>
+                    <p>Entrer les nouvelles informations de l'utilisateur à modifier.</p>
+                    <label for="name">Nom : </label>
+                    <input type="text" name="name">
+                    <br><br>
+                    <label for="email">Email : </label>
+                    <input type="email" name="email">
+                    <br><br>
+                    <label for="password">Mot de passe : </label>
+                    <input type="password" name="password">
+                    <br><br>
+                    <input type="hidden" name="_method" value="PATCH">
+                    <input type="submit" value="Modifier utilisateur">
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Supprimer utilisateur</h5>
+            <p>Entrer l'id de l'utilisateur à supprimer ci-dessous pour valider la suppression.</p>
+            <input type="text" id="userToDeleteId">
+            <br><br>
+            <input type="button" value="Validation" onclick="showForm('deleteUser'); getUserIdToEditActionForm('userToDeleteId', 'deleteUser')">
+            <form action="" method="post" style="display: none;" id="deleteUser">
+                <br>
+                <fieldset>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <p>Voulez-vous vraiment supprimer l'utilisateur?</p>
+                    <input type="submit" value="Supprimer utilisateur">
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+
+    <br><br><br>
+    <div class="row justify-content-around align-items-center">
+        <h4 style="padding-bottom: 60px;">Catways</h4>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Ajouter un catway</h5>
+            <br>
+            <input type="button" value="Formulaire" onclick="showForm('addCatway')">
+            <form action="/catways" method="post" style="display: none;" id="addCatway">
+                <br>
+                <fieldset>
+                    <p>Entrer les informations du nouveau catway.</p>
+                    <label for="catwayNumber">Numéro : </label>
+                    <input type="number" min="1" name="catwayNumber">
+                    <br><br>
+                    <label for="type">Type : </label>
+                    <select name="type">
+                        <option value="short">Short</option>
+                        <option value="long">Long</option>
+                    </select>
+                    <br><br>
+                    <label for="catwayState">État : </label>
+                    <textarea name="catwayState" placeholder="Détaillez l'état du catway"></textarea>
+                    <br><br>
+                    <input type="submit" value="Ajouter catway">
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Liste des catways</h5>
+            <br>
+            <a href="/catways"><input type="button" value="Afficher la liste"></a>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Chercher catway par son id</h5>
+            <p>Entrer l'id du catway recherché ci-dessous avant de lancer la recherche.</p>
+            <input type="text" id="catwayToShowId" onchange="getCatwayIdToEditActionForm('catwayToShowId', 'getCatwayById')">
+            <form action="" method="get" id="getCatwayById">
+                <br>
+                <input type="submit" value="Chercher catway">
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Modifier l'état d'un catway</h5>
+            <p>Entrer l'id du catway à modifier ci-dessous avant d'afficher le formulaire.</p>
+            <input type="text" id="catwayToEditId">
+            <br><br>
+            <input type="button" value="Formulaire" onclick="showForm('editCatway'); getCatwayIdToEditActionForm('catwayToEditId', 'editCatway')">
+            <form action="" method="post" style="display: none;" id="editCatway">
+                <br>
+                <fieldset>
+                    <p>Entrer le nouvel état du catway.</p>
+                    <label for="catwayState">État :</label>
+                    <textarea name="catwayState"></textarea>
+                    <br><br>
+                    <input type="hidden" name="_method" value="PATCH">
+                    <input type="submit" value="Modifier catway">
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Remplacer catway</h5>
+            <p>Entrer l'id du catway à remplacer ci-dessous avant d'afficher le formulaire.</p>
+            <input type="text" id="catwayToReplaceId">
+            <br><br>
+            <input type="button" value="Formulaire" onclick="showForm('replaceCatway'); getCatwayIdToEditActionForm('catwayToReplaceId', 'replaceCatway')">
+            <form action="" method="post" style="display: none;" id="replaceCatway">
+                <fieldset>
+                    <br>
+                    <p>Entrer les nouvelles informations du catway.</p>
+                    <label for="catwayNumber">Numéro</label>
+                    <input type="number" min="1" name="catwayNumber">
+                    <br><br>
+                    <label for="type">Type : </label>
+                    <select name="type">
+                        <option value="short">Short</option>
+                        <option value="long">Long</option>
+                    </select>
+                    <br><br>
+                    <label for="catwayState">État</label>
+                    <textarea name="catwayState"></textarea>
+                    <br><br>
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="submit" value="Remplacer catway">
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Supprimer catway</h5>
+            <p>Entrer l'id du catway à supprimer ci-dessous pour valider la suppression.</p>
+            <input type="text" id="catwayToDeleteId">
+            <br><br>
+            <input type="button" value="Validation" onclick="showForm('deleteCatway'); getCatwayIdToEditActionForm('catwayToDeleteId', 'deleteCatway')">
+            <form action="" method="post" style="display: none;" id="deleteCatway">
+                <br>
+                <fieldset>
+                    <p>Voulez-vous vraiment supprimer le catway?</p>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" value="Supprimer catway">
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+
+    <br><br><br>
+    <div class="row justify-content-around align-items-center">
+        <h4 style="padding-bottom: 60px;">Réservations</h4>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Ajouter une réservation</h5>
+            <p>Entrer l'id du catway concerné par la nouvelle réservation ci-dessous avant d'afficher le formulaire.</p>
+            <input type="text" id="catwayToBookId">
+            <br><br>
+            <input type="button" value="Formulaire" onclick="showForm('addReservation'); getCatwayIdForReservationsToEditActionForm('catwayToBookId', 'addReservation')">
+            <form action="" method="post" style="display: none;" id="addReservation">
+                <br>
+                <fieldset>
+                    <p>Entrer les informations de la réservation du catway choisi.</p>
+                    <label for="clientName">Nom du client : </label>
+                    <input type="text" name="clientName">
+                    <br><br>
+                    <label for="boatName">Nom du bâteau : </label>
+                    <input type="text" name="boatName">
+                    <br><br>
+                    <label for="checkIn">Date d'entrée : </label>
+                    <input type="date" name="checkIn">
+                    <br><br>
+                    <label for="checkOut">Date de sortie : </label>
+                    <input type="date" name="checkOut">
+                    <br><br>
+                    <input type="submit" value="Ajouter réservation">
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Liste de réservations par catway</h5>
+            <p>Entrer l'id du catway dont vous souhaitez afficher la liste de réservations ci-dessous avant de lancer la recherche.</p>
+            <input type="text" id="catwayToShowReservationsId" onchange="getCatwayIdForReservationsToEditActionForm('catwayToShowReservationsId', 'getReservationsListByCatwayId')">
+            <form action="" method="get" id="getReservationsListByCatwayId">
+                <br>
+                <input type="submit" value="Chercher ">
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3" style="margin-bottom: 40px;">
+            <h5>Chercher réservation par son id</h5>
+            <p>Entrer l'id de la réservation ci-dessous avant de lancer la recherche.</p>
+            <input type="text" id="reservationToShowId" onchange="getReservationIdToEditActionForm('reservationToShowId', 'getReservationById')">
+            <form action="" method="get" id="getReservationById">
+                <br>
+                <input type="submit" value="Chercher réservation">
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+            <h5>Supprimer réservation</h5>
+            <p>Entrer l'id de la réservation à supprimer ci-dessous pour valider la suppression.</p>
+            <input type="text" id="getReservationToDeleteId">
+            <br><br>
+            <input type="button" value="Validation" onclick="showForm('deleteReservation'); getReservationIdToEditActionForm('getReservationToDeleteId', 'deleteReservation')">
+            <form action="" method="post" style="display: none;" id="deleteReservation">
+                <br>
+                <fieldset>
+                    <p>Voulez-vous vraiment supprimer la réservation?</p>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" value="Supprimer">
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function showForm(id) {
+        if (document.getElementById(id).style.display == 'none') {
+            document.getElementById(id).style.display = 'block';
+            } else {
+            document.getElementById(id).style.display = 'none';
+            }
+    }
+
+    function getUserIdToEditActionForm(value, form) {
+        const userId = document.getElementById(value).value;
+        document.getElementById(form).action = '/users/' + userId;
+    }
+
+    function getCatwayIdToEditActionForm(value, form) {
+        const catwayId = document.getElementById(value).value;
+        document.getElementById(form).action = '/catways/' + catwayId;
+    }
+
+    function getCatwayIdForReservationsToEditActionForm(value, form) {
+        const catwayId = document.getElementById(value).value;
+        document.getElementById(form).action = '/catways/' + catwayId + '/reservations';
+    }
+
+    function getReservationIdToEditActionForm(value, form) {
+        const reservationId = document.getElementById(value).value;
+        document.getElementById(form).action = '/catways/board/' + reservationId;
+    }
+
+    
+
+</script>

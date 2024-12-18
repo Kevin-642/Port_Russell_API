@@ -1,0 +1,10 @@
+<form action="/catways/<%= catway._id %>/reservations/<%= reservation._id %>" method="post" id="deleteReservation">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit">
+</form>
+
+<script>
+    window.onload = function() {
+        document.getElementById('deleteReservation').submit();
+    }
+</script>

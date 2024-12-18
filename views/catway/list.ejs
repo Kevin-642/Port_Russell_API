@@ -1,0 +1,27 @@
+<h2>Liste des catways</h2>
+<p>Intéragir avec un catway.</p>
+<br><br>
+<table style="border-spacing: 15px; text-align: center;">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Numéro</th>
+            <th>Type</th>
+            <th>État</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% catways.forEach(function(catway) {%>
+            <tr>
+                <td><a href="/catways/<%= catway._id %>"><input type="button" value="Afficher"></a></td>
+                <td><%= catway._id %></td>
+                <td><%= catway.catwayNumber %></td>
+                <td><%= catway.type %></td>
+                <td><%= catway.catwayState %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<br><br>
+<input type="button" value="Retour" onclick="history.back()">

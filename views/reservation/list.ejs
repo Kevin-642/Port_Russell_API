@@ -1,0 +1,29 @@
+<h2>Liste des réservations du catway numéro <%= catway.catwayNumber %></h2>
+<p>Intéragissez avec une des réservations.</p>
+<br><br>
+<table style="border-spacing: 15px; text-align: center;">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Client</th>
+            <th>Bâteau</th>
+            <th>Date d'entrée</th>
+            <th>Date de sortie</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% reservations.forEach(function(reservation) {%>
+            <tr>
+                <td><a href="/catways/<%= catway._id %>/reservations/<%= reservation._id %>"><input type="button" value="Afficher"></a></td>
+                <td><%= reservation._id %></td>
+                <td><%= reservation.clientName %></td>
+                <td><%= reservation.boatName %></td>
+                <td><%= reservation.checkIn.toLocaleDateString() %></td>
+                <td><%= reservation.checkOut.toLocaleDateString() %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<br><br>
+<input type="button" value="Retour" onclick="history.back()">

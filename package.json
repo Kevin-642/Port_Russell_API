@@ -1,0 +1,35 @@
+{
+  "name": "portrussell",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "env-cmd -f ./env/.env.dev nodemon ./bin/www",
+    "prod": "env-cmd -f ./env/.env.prod nodemon ./bin/www"
+  },
+  "dependencies": {
+    "@types/chai": "^5.0.1",
+    "bcrypt": "^5.1.1",
+    "chai": "^5.1.2",
+    "chai-http": "^5.1.1",
+    "cjs": "^0.0.11",
+    "cookie-parser": "~1.4.7",
+    "cors": "^2.8.5",
+    "debug": "~4.4.0",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "~4.21.2",
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
+    "mocha": "^11.0.1",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.9.1",
+    "morgan": "~1.10.0",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "jsdoc": "^4.0.4"
+  }
+}

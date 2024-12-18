@@ -1,0 +1,24 @@
+<h2>Liste des utilisateurs</h2>
+
+<table style="border-spacing: 15px; text-align: center;">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Id : </th>
+            <th>Nom : </th>
+            <th>Email : </th>
+        </tr>
+    </thead>
+    <tbody>
+        <% users.forEach(function(user) {%>
+            <tr>
+                <td><a href="/users/<%= user._id %>"><input type="button" value="Afficher"></a></td>
+                <td><%= user._id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<br><br>
+<input type="button" value="Retour" onclick="history.back()">
